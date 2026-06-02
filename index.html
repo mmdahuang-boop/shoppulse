@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopPulse — Daily TikTok Shop Competitor Tracking</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #f0f0f0; line-height: 1.6; }
+  .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+  .hero { text-align: center; padding: 60px 0 40px; }
+  .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, #ff0050, #00f2ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 20px; color: #aaa; max-width: 500px; margin: 0 auto 32px; }
+  .cta { display: inline-block; padding: 14px 36px; font-size: 18px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #ff0050, #ff3b30); border: none; border-radius: 12px; cursor: pointer; text-decoration: none; transition: transform .2s; }
+  .cta:hover { transform: scale(1.04); }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 48px 0; }
+  .feature { background: #1a1a1a; border-radius: 16px; padding: 28px 24px; border: 1px solid #2a2a2a; }
+  .feature .icon { font-size: 32px; margin-bottom: 12px; }
+  .feature h3 { font-size: 18px; margin-bottom: 8px; }
+  .feature p { color: #999; font-size: 15px; }
+  .report-preview { background: #1a1a1a; border-radius: 16px; padding: 32px; border: 1px solid #2a2a2a; margin: 48px 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; line-height: 1.8; white-space: pre-wrap; color: #ccc; overflow-x: auto; }
+  .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 48px 0; }
+  .plan { background: #1a1a1a; border-radius: 16px; padding: 32px 24px; border: 1px solid #2a2a2a; text-align: center; }
+  .plan.popular { border-color: #ff0050; border-width: 2px; }
+  .plan h3 { font-size: 20px; margin-bottom: 4px; }
+  .plan .price { font-size: 36px; font-weight: 800; margin: 16px 0 4px; }
+  .plan .price span { font-size: 16px; font-weight: 400; color: #888; }
+  .plan ul { list-style: none; text-align: left; margin: 16px 0; }
+  .plan ul li { padding: 6px 0; color: #aaa; font-size: 14px; }
+  .plan ul li::before { content: '✓ '; color: #00f2ea; }
+  .faq { margin: 48px 0; }
+  .faq h2 { text-align: center; margin-bottom: 24px; }
+  .faq-item { background: #1a1a1a; border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; border: 1px solid #2a2a2a; }
+  .faq-item h4 { margin-bottom: 6px; }
+  .faq-item p { color: #999; font-size: 14px; }
+  .footer { text-align: center; color: #666; font-size: 13px; padding: 40px 0 20px; }
+  .highlight { color: #00f2ea; }
+  .badge { display: inline-block; padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 20px; margin-bottom: 16px; }
+  .badge-beta { background: rgba(255,0,80,.15); color: #ff0050; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+  <span class="badge badge-beta">BETA · FIRST 10 USERS 50% OFF</span>
+  <h1>Know What Your TikTok Shop<br>Competitors Are Doing.<br>Every Single Day.</h1>
+  <p>ShopPulse tracks competitor products and sends you a morning report. No dashboard to check. No manual research. Just the data you need, delivered.</p>
+  <a href="#pricing" class="cta">Get Early Access — $9.50/mo</a>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <div class="icon">📊</div>
+    <h3>Daily Price Tracking</h3>
+    <p>See every price change on your competitors' products, with 7-day trends and alerts when something moves.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">📈</div>
+    <h3>Sales Velocity</h3>
+    <p>Track estimated sales volume changes. Know which products are gaining momentum before it's obvious.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🎬</div>
+    <h3>Creator Intelligence</h3>
+    <p>See which creators are driving sales for competitors. Reach out before they get locked into exclusives.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">⚡</div>
+    <h3>Change Alerts</h3>
+    <p>Price dropped 5%? New top creator? Sales spiking? Get alerted same day, not a week later.</p>
+  </div>
+</div>
+
+<h2 style="text-align:center;margin:48px 0 24px;">Your Daily Report Looks Like This</h2>
+<div class="report-preview">
+📊 <strong>TikTok Shop Daily Competitor Report</strong>
+📅 2026-06-02
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 TODAY'S OVERVIEW
+Tracking: <strong>6 products</strong> across Beauty · Electronics · Home
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📈 PRODUCT DETAILS
+
+<strong>1. Matte Lipstick - 12 Colors</strong> 🔺 +4.0% (7d)
+  💰 $9.15  |  📦 38,950 sold  |  ⭐ 4.5
+  🎬 Top creator: @lipstickqueen (725K · $204K GMV)
+
+<strong>2. Wireless Earbuds Pro</strong> 🔻 -3.3% (7d)
+  💰 $29.45  |  📦 35,355 sold  |  ⭐ 4.4
+  🎬 Top creator: @techreviewdaily (1.2M · $467K GMV)
+
+<strong>3. LED Strip Lights 5M</strong> 🔻 -3.3% (7d)
+  💰 $15.66  |  📦 57,558 sold  |  ⭐ 4.3
+
+...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ 7-DAY ALERTS
+• Matte Lipstick price surge: +4.0% ($8.80 → $9.15)
+• LED Strip Lights price drop: -3.3% ($16.20 → $15.66)
+• Earbuds price drop: -3.3% ($30.45 → $29.45)
+</div>
+
+<h2 style="text-align:center;margin:48px 0 24px;" id="pricing">Simple Pricing</h2>
+<div class="pricing">
+  <div class="plan popular">
+    <span class="badge badge-beta" style="margin-bottom:8px;">BETA PRICE</span>
+    <h3>Starter</h3>
+    <div class="price">$9<span>/mo</span></div>
+    <p style="color:#888;font-size:14px;text-decoration:line-through;">$19/mo</p>
+    <ul>
+      <li>5 tracked products</li>
+      <li>Daily price & sales tracking</li>
+      <li>7-day trend analysis</li>
+      <li>Email report every morning</li>
+      <li>Price change alerts</li>
+    </ul>
+    <a href="mailto:shoppulse@proton.me?subject=Starter Beta" class="cta" style="display:block;text-align:center;font-size:15px;padding:12px;">Get Started</a>
+  </div>
+  <div class="plan">
+    <h3>Growth</h3>
+    <div class="price">$24<span>/mo</span></div>
+    <p style="color:#888;font-size:14px;text-decoration:line-through;">$49/mo</p>
+    <ul>
+      <li>20 tracked products</li>
+      <li>Everything in Starter</li>
+      <li>Creator tracking & GMV estimates</li>
+      <li>CSV export</li>
+      <li>Priority support</li>
+    </ul>
+    <a href="mailto:shoppulse@proton.me?subject=Growth Beta" class="cta" style="display:block;text-align:center;font-size:15px;padding:12px;background:linear-gradient(135deg,#2a2a2a,#333);">Get Started</a>
+  </div>
+  <div class="plan">
+    <h3>Pro</h3>
+    <div class="price">$49<span>/mo</span></div>
+    <p style="color:#888;font-size:14px;text-decoration:line-through;">$99/mo</p>
+    <ul>
+      <li>50 tracked products</li>
+      <li>Everything in Growth</li>
+      <li>API access</li>
+      <li>Custom alert thresholds</li>
+      <li>White-label reports</li>
+    </ul>
+    <a href="mailto:shoppulse@proton.me?subject=Pro Beta" class="cta" style="display:block;text-align:center;font-size:15px;padding:12px;background:linear-gradient(135deg,#2a2a2a,#333);">Get Started</a>
+  </div>
+</div>
+
+<div class="faq">
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h4>How is this different from FastMoss or Kalodata?</h4>
+    <p>Those are analytics dashboards — you have to log in, search, and dig. ShopPulse is a <strong>daily push report</strong>. You read it in 2 minutes over coffee. We track YOUR specific competitors, not the whole market.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Where does the data come from?</h4>
+    <p>We aggregate from multiple TikTok Shop data sources to provide the most accurate picture of competitor activity. Sales numbers are estimates based on publicly available signals.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Can I change which products I track?</h4>
+    <p>Yes. Add or remove products anytime. Changes take effect the next day.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Is there a free trial?</h4>
+    <p>First 7 days are free. No credit card required to start the trial for beta users.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>ShopPulse · Built for TikTok Shop sellers who want an edge</p>
+  <p style="margin-top:8px;">© 2026 ShopPulse. Not affiliated with TikTok.</p>
+</div>
+
+</div>
+</body>
+</html>
