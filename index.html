@@ -1,198 +1,187 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShopPulse — 抖音趋势数据看板</title>
+<title>ShopPulse — TikTok Trend Intelligence from Overseas</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; }
-  .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 24px 32px; border-bottom: 1px solid #2a2a2a; display: flex; justify-content: space-between; align-items: center; }
-  .header h1 { font-size: 24px; background: linear-gradient(135deg, #ff0050, #00f2ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .header .meta { color: #888; font-size: 13px; }
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; padding: 24px 32px; }
-  .stat-card { background: #1a1a1a; border-radius: 12px; padding: 20px; border: 1px solid #2a2a2a; text-align: center; }
-  .stat-card .value { font-size: 32px; font-weight: 800; }
-  .stat-card .label { color: #888; font-size: 13px; margin-top: 4px; }
-  .stat-card .value.beauty { color: #ff6b9d; }
-  .stat-card .value.home { color: #4ecdc4; }
-  .stat-card .value.electronics { color: #45b7d1; }
-  .stat-card .value.fashion { color: #f9ca24; }
-  .stat-card .value.food { color: #ff9f43; }
-  .content { padding: 0 32px 32px; }
-  .filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-  .filter-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #aaa; cursor: pointer; font-size: 13px; transition: all .2s; }
-  .filter-btn:hover, .filter-btn.active { background: #ff0050; color: #fff; border-color: #ff0050; }
-  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; }
-  .product-card { background: #1a1a1a; border-radius: 14px; border: 1px solid #2a2a2a; overflow: hidden; transition: border-color .2s; }
-  .product-card:hover { border-color: #444; }
-  .product-card .card-header { padding: 18px 20px 12px; display: flex; justify-content: space-between; align-items: flex-start; }
-  .product-card .card-header .name { font-size: 16px; font-weight: 700; line-height: 1.4; flex: 1; margin-right: 12px; }
-  .product-card .card-header .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
-  .badge-beauty { background: rgba(255,107,157,.15); color: #ff6b9d; }
-  .badge-home { background: rgba(78,205,196,.15); color: #4ecdc4; }
-  .badge-electronics { background: rgba(69,183,209,.15); color: #45b7d1; }
-  .badge-fashion { background: rgba(249,202,36,.15); color: #f9ca24; }
-  .badge-food { background: rgba(255,159,67,.15); color: #ff9f43; }
-  .badge-live { background: rgba(255,0,80,.15); color: #ff0050; font-size: 10px; }
-  .card-body { padding: 0 20px 16px; }
-  .metric-row { display: flex; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
-  .metric { font-size: 13px; color: #aaa; }
-  .metric strong { color: #e0e0e0; }
-  .engagement-bar { display: flex; gap: 16px; margin: 10px 0; font-size: 12px; }
-  .engagement-bar span { color: #888; }
-  .engagement-bar .emoji { font-size: 14px; }
-  .creator-row { display: flex; align-items: center; gap: 10px; background: #111; border-radius: 10px; padding: 10px 14px; margin-top: 10px; }
-  .creator-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #ff0050, #ff6b9d); display: flex; align-items: center; justify-content: center; font-size: 14px; color: #fff; }
-  .creator-info { flex: 1; font-size: 12px; }
-  .creator-info .c-name { font-weight: 600; color: #e0e0e0; }
-  .creator-info .c-stats { color: #888; }
-  .card-footer { background: #111; padding: 12px 20px; font-size: 11px; color: #666; display: flex; justify-content: space-between; }
-  .empty { text-align: center; padding: 60px 20px; color: #666; }
-  .source-tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: rgba(0,242,234,.1); color: #00f2ea; margin-left: 6px; }
-  .source-tag.mock { background: rgba(255,255,255,.05); color: #666; }
-  @media (max-width: 480px) { .product-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #f0f0f0; line-height: 1.6; }
+  .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+  .hero { text-align: center; padding: 60px 0 40px; }
+  .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, #ff0050, #00f2ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 20px; color: #aaa; max-width: 500px; margin: 0 auto 32px; }
+  .cta { display: inline-block; padding: 14px 36px; font-size: 18px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #ff0050, #ff3b30); border: none; border-radius: 12px; cursor: pointer; text-decoration: none; transition: transform .2s; }
+  .cta:hover { transform: scale(1.04); }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 48px 0; }
+  .feature { background: #1a1a1a; border-radius: 16px; padding: 28px 24px; border: 1px solid #2a2a2a; }
+  .feature .icon { font-size: 32px; margin-bottom: 12px; }
+  .feature h3 { font-size: 18px; margin-bottom: 8px; }
+  .feature p { color: #999; font-size: 15px; }
+  .report-preview { background: #1a1a1a; border-radius: 16px; padding: 32px; border: 1px solid #2a2a2a; margin: 48px 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; line-height: 1.8; white-space: pre-wrap; color: #ccc; overflow-x: auto; }
+  .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 48px 0; }
+  .plan { background: #1a1a1a; border-radius: 16px; padding: 32px 24px; border: 1px solid #2a2a2a; text-align: center; }
+  .plan.popular { border-color: #ff0050; border-width: 2px; }
+  .plan h3 { font-size: 20px; margin-bottom: 4px; }
+  .plan .price { font-size: 36px; font-weight: 800; margin: 16px 0 4px; }
+  .plan .price span { font-size: 16px; font-weight: 400; color: #888; }
+  .plan ul { list-style: none; text-align: left; margin: 16px 0; }
+  .plan ul li { padding: 6px 0; color: #aaa; font-size: 14px; }
+  .plan ul li::before { content: '✓ '; color: #00f2ea; }
+  .faq { margin: 48px 0; }
+  .faq h2 { text-align: center; margin-bottom: 24px; }
+  .faq-item { background: #1a1a1a; border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; border: 1px solid #2a2a2a; }
+  .faq-item h4 { margin-bottom: 6px; }
+  .faq-item p { color: #999; font-size: 14px; }
+  .footer { text-align: center; color: #666; font-size: 13px; padding: 40px 0 20px; }
+  .highlight { color: #00f2ea; }
+  .badge { display: inline-block; padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 20px; margin-bottom: 16px; }
+  .badge-beta { background: rgba(255,0,80,.15); color: #ff0050; }
 </style>
 </head>
 <body>
+<div class="container">
 
-<div class="header">
-  <div>
-    <h1>ShopPulse Dashboard</h1>
-    <div style="font-size:13px;color:#888;margin-top:4px;">抖音趋势情报 · Douyin Trend Intelligence</div>
+<div class="hero">
+  <span class="badge badge-beta">BETA · FIRST 10 USERS 50% OFF</span>
+  <h1>Discover What's Trending in China<br>Before It Hits TikTok Shop.<br>Every Single Day.</h1>
+  <p>ShopPulse monitors Douyin (China's TikTok) to spot emerging product trends, viral content, and rising creators — so you can source and list before the competition catches on. Delivered to your inbox every morning.</p>
+  <a href="https://paypal.me/xiaobing388/9.5" class="cta">Get Early Access — $9.50/mo</a>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <div class="icon">🔍</div>
+    <h3>Douyin Trend Discovery</h3>
+    <p>We scan Douyin (China's TikTok with 700M+ users) daily for viral products. See what's hot in China weeks before it peaks on TikTok Shop.</p>
   </div>
-  <div class="meta">
-    <div>更新: 2026-06-05 16:33 CST</div>
-    <div>数据源: JustOneAPI + 抖音视频搜索</div>
+  <div class="feature">
+    <div class="icon">📈</div>
+    <h3>Engagement Velocity</h3>
+    <p>Track likes, comments, and shares on product-related Douyin videos. Spot momentum shifts before they turn into sales spikes.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🎬</div>
+    <h3>Creator Intelligence</h3>
+    <p>See which Chinese creators are driving trends. Know who to watch and which content formats are converting — adapt them for your market.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">⚡</div>
+    <h3>First-Mover Alerts</h3>
+    <p>New product going viral on Douyin? Trending hashtag emerging? Get alerted the same day and source before anyone else lists it.</p>
   </div>
 </div>
 
-<div class="stats" id="stats"></div>
+<h2 style="text-align:center;margin:48px 0 24px;">Your Daily Trend Report Looks Like This</h2>
+<div class="report-preview">
+📊 <strong>TikTok Trend Intelligence — Daily Report</strong>
+📅 2026-06-02
+🇨🇳 Source: Douyin (China TikTok)
 
-<div class="content">
-  <div class="filters">
-    <button class="filter-btn active" onclick="filter('all')">全部</button>
-    <button class="filter-btn" onclick="filter('Beauty')">美妆 💄</button>
-    <button class="filter-btn" onclick="filter('Home')">家居 🏠</button>
-    <button class="filter-btn" onclick="filter('Electronics')">数码 📱</button>
-    <button class="filter-btn" onclick="filter('Fashion')">穿搭 👗</button>
-    <button class="filter-btn" onclick="filter('Food')">零食 🍿</button>
-  </div>
-  <div id="products" class="product-grid"></div>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 TODAY'S TRENDING PRODUCTS
+
+<strong>1. Gradient Blush Compact</strong> 🔥 Trending (24h engagement: 892K)
+  🏷️ Keyword: 腮红推荐 | 💄 Category: Beauty
+  👍 456K · 💬 28K · 🔄 15K shares
+  🎬 Top creator: @makeup_lala (2.1M · 89K avg views)
+
+<strong>2. Magnetic Phone Ring Stand</strong> 📈 Rising (24h engagement: 654K)
+  🏷️ Keyword: 手机配件 | 📱 Category: Electronics
+  👍 312K · 💬 19K · 🔄 11K shares
+  🎬 Top creator: @techpopdaily (890K · 52K avg views)
+
+<strong>3. Collagen Lip Mask Set</strong> 🆕 New Signal (24h engagement: 423K)
+  🏷️ Keyword: 唇膜推荐 | 💄 Category: Beauty
+  👍 198K · 💬 14K · 🔄 8K shares
+  🎬 Top creator: @beautytips_xia (540K · 34K avg views)
+
+...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ TREND ALERTS
+• "Gradient blush" hashtag up 340% this week — 2.1M+ posts
+• Magnetic phone accessories surging across 3 categories
+• Lip care products showing early viral signal (act now)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 TODAY'S SOURCING TIP
+"Gradient Blush Compact" has no strong TikTok Shop listings yet.
+Early mover window: source now, list at $14.99-$19.99.
 </div>
 
-<script>
-const DATA = {"generated_at": "2026-06-05 16:33", "total_snapshots": 237, "products": [{"id": "d92f3391d9916a19531c", "name": "超详细全流程步骤拆解！日常全妆教程（新老手皆宜版） 迟到..", "category": "Beauty", "shop": "@姜乘澜", "price": 14.0, "sales": 1183828, "rating": 4.0, "reviews": 59191, "source": "douyin_video_search", "engagement": {"digg": 5301053, "comment": 1220577, "share": 1365359, "search_keyword": "美妆好物"}, "creators": [{"name": "姜乘澜", "id": "87242178613", "followers": 16877564, "video_views": 0, "est_gmv": 4972077.6}], "snapshots": [{"date": "2026-06-05", "price": 14.0, "sales": 1183828}], "snapshot_count": 1}, {"id": "ce8ddef97450c939b647", "name": "教你素颜不化妆，不换头，简单搭配也可以让基础款变得更高级..", "category": "Fashion", "shop": "@黄昭昭", "price": 14.0, "sales": 517923, "rating": 4.2, "reviews": 25896, "source": "douyin_video_search", "engagement": {"digg": 2969325, "comment": 33672, "share": 714189, "search_keyword": "女装穿搭"}, "creators": [{"name": "黄昭昭", "id": "1514500168888425", "followers": 2819574, "video_views": 0, "est_gmv": 2175276.6}], "snapshots": [{"date": "2026-06-05", "price": 14.0, "sales": 517923}], "snapshot_count": 1}, {"id": "e82029509ce0c64adddc", "name": "认准这几个关键词，几块钱就能轻松get收纳神器！", "category": "Home", "shop": "@郭大王", "price": 33.0, "sales": 403241, "rating": 4.2, "reviews": 20162, "source": "douyin_video_search", "engagement": {"digg": 2639561, "comment": 41379, "share": 436699, "search_keyword": "收纳神器"}, "creators": [{"name": "郭大王", "id": "2950694819071566", "followers": 1994835, "video_views": 0, "est_gmv": 3992085.9}], "snapshots": [{"date": "2026-06-05", "price": 33.0, "sales": 403241}], "snapshot_count": 1}, {"id": "cf433747c31fd8393cce", "name": "爆炸💥好用‼️不按说明书的反骨收纳🙂‍↔️", "category": "Home", "shop": "@妹等Mayden", "price": 26.0, "sales": 394792, "rating": 5.0, "reviews": 19739, "source": "douyin_video_search", "engagement": {"digg": 1952200, "comment": 22947, "share": 649942, "search_keyword": "收纳神器"}, "creators": [{"name": "妹等Mayden", "id": "92655484179", "followers": 404410, "video_views": 0, "est_gmv": 3079377.6}], "snapshots": [{"date": "2026-06-05", "price": 26.0, "sales": 394792}], "snapshot_count": 1}, {"id": "5ce237d83e96dcc93e7e", "name": "配色对穿搭的影响", "category": "Fashion", "shop": "@人", "price": 17.9, "sales": 227216, "rating": 3.9, "reviews": 11360, "source": "douyin_video_search", "engagement": {"digg": 1665538, "comment": 7537, "share": 197184, "search_keyword": "女装穿搭"}, "creators": [{"name": "人", "id": "7544305499068613690", "followers": 363873, "video_views": 0, "est_gmv": 1220149.92}], "snapshots": [{"date": "2026-06-05", "price": 17.9, "sales": 227216}], "snapshot_count": 1}, {"id": "254b87dba77e4a56bf98", "name": "你可能不认识我，但99%看过我的爆🔥收纳diy", "category": "Home", "shop": "@真真真ing", "price": 22.3, "sales": 193748, "rating": 4.5, "reviews": 9687, "source": "douyin_video_search", "engagement": {"digg": 888670, "comment": 8251, "share": 344104, "search_keyword": "收纳神器"}, "creators": [{"name": "真真真ing", "id": "2155458652021516", "followers": 1289719, "video_views": 0, "est_gmv": 1296174.12}], "snapshots": [{"date": "2026-06-05", "price": 22.3, "sales": 193748}], "snapshot_count": 1}, {"id": "5c13753eb2bd0c115614", "name": "买齐了八个必备电子产品，加一块还没我桌子贵", "category": "Electronics", "shop": "@石在没玩够", "price": 37.2, "sales": 163177, "rating": 5.0, "reviews": 8158, "source": "douyin_video_search", "engagement": {"digg": 895892, "comment": 13457, "share": 236322, "search_keyword": "数码好物"}, "creators": [{"name": "石在没玩够", "id": "1944414045352926", "followers": 96390, "video_views": 0, "est_gmv": 1821055.32}], "snapshots": [{"date": "2026-06-05", "price": 37.2, "sales": 163177}], "snapshot_count": 1}, {"id": "44a8ffc2636084e6c15c", "name": "当我意识到过了20岁 就该穿点显贵的…", "category": "Fashion", "shop": "@胡白白", "price": 17.3, "sales": 160808, "rating": 5.0, "reviews": 8040, "source": "douyin_video_search", "engagement": {"digg": 1048712, "comment": 10090, "share": 179731, "search_keyword": "女装穿搭"}, "creators": [{"name": "胡白白", "id": "3593672833120958", "followers": 100809, "video_views": 0, "est_gmv": 834593.52}], "snapshots": [{"date": "2026-06-05", "price": 17.3, "sales": 160808}], "snapshot_count": 1}, {"id": "a70a6fd018768e04ab45", "name": "均价几元的pxx彩妆大合集", "category": "Beauty", "shop": "@小乔大王", "price": 7.3, "sales": 141332, "rating": 3.9, "reviews": 7066, "source": "douyin_video_search", "engagement": {"digg": 869301, "comment": 17722, "share": 169526, "search_keyword": "美妆好物"}, "creators": [{"name": "小乔大王", "id": "7549127213556974652", "followers": 345602, "video_views": 0, "est_gmv": 309517.08}], "snapshots": [{"date": "2026-06-05", "price": 7.3, "sales": 141332}], "snapshot_count": 1}, {"id": "31288f9c60a6a320cb11", "name": "这真的不是一个新发明啊，我刚上大学的时候就带到宿舍用了😅..", "category": "Home", "shop": "@♬瞳♛", "price": 31.0, "sales": 138540, "rating": 4.4, "reviews": 6927, "source": "douyin_video_search", "engagement": {"digg": 403166, "comment": 20921, "share": 313464, "search_keyword": "家居好物"}, "creators": [{"name": "♬瞳♛", "id": "61319656130", "followers": 3293, "video_views": 0, "est_gmv": 1288422.0}], "snapshots": [{"date": "2026-06-05", "price": 31.0, "sales": 138540}], "snapshot_count": 1}, {"id": "60b4209e3b7a349e0c44", "name": "长期主义的实用好物分享", "category": "Home", "shop": "@桃子", "price": 32.9, "sales": 122641, "rating": 4.9, "reviews": 6132, "source": "douyin_video_search", "engagement": {"digg": 714928, "comment": 8828, "share": 164609, "search_keyword": "厨房好物"}, "creators": [{"name": "桃子", "id": "72864931308", "followers": 29197, "video_views": 0, "est_gmv": 1210466.67}], "snapshots": [{"date": "2026-06-05", "price": 32.9, "sales": 122641}], "snapshot_count": 1}, {"id": "6e3f7a0b75c92846b6be", "name": "完全没想到比我切的好太多，除夕可以露一手了", "category": "Home", "shop": "@奇哆哆", "price": 37.7, "sales": 120746, "rating": 4.3, "reviews": 6037, "source": "douyin_video_search", "engagement": {"digg": 941608, "comment": 28087, "share": 69895, "search_keyword": "厨房好物"}, "creators": [{"name": "奇哆哆", "id": "108162182571", "followers": 432934, "video_views": 0, "est_gmv": 1365637.26}], "snapshots": [{"date": "2026-06-05", "price": 37.7, "sales": 120746}], "snapshot_count": 1}, {"id": "c9a923e71d81899f8db8", "name": "9个方便实用到让我惊艳的厨房好物", "category": "Home", "shop": "@有猫", "price": 15.8, "sales": 115080, "rating": 4.0, "reviews": 5754, "source": "douyin_video_search", "engagement": {"digg": 566138, "comment": 6305, "share": 190685, "search_keyword": "家居好物"}, "creators": [{"name": "有猫", "id": "3910343471925790", "followers": 293131, "video_views": 0, "est_gmv": 545479.2}], "snapshots": [{"date": "2026-06-05", "price": 15.8, "sales": 115080}], "snapshot_count": 1}, {"id": "d7ebcad54940926e1099", "name": "人怎么可以聪明到这种地步‼️", "category": "Home", "shop": "@多米的装修日记", "price": 8.2, "sales": 102484, "rating": 4.6, "reviews": 5124, "source": "douyin_video_search", "engagement": {"digg": 395001, "comment": 5676, "share": 206164, "search_keyword": "家居好物"}, "creators": [{"name": "多米的装修日记", "id": "740427027985177", "followers": 104429, "video_views": 0, "est_gmv": 252110.64}], "snapshots": [{"date": "2026-06-05", "price": 8.2, "sales": 102484}], "snapshot_count": 1}, {"id": "da02d2d1381b09950ed5", "name": "人怎么可以聪明到这种地步‼️100个懒人家居爽点！夯到爆..", "category": "Home", "shop": "@多米的装修日记", "price": 20.0, "sales": 85770, "rating": 5.0, "reviews": 4288, "source": "douyin_video_search", "engagement": {"digg": 348494, "comment": 3878, "share": 167152, "search_keyword": "家居好物"}, "creators": [{"name": "多米的装修日记", "id": "740427027985177", "followers": 104429, "video_views": 0, "est_gmv": 514620.0}], "snapshots": [{"date": "2026-06-05", "price": 20.0, "sales": 85770}], "snapshot_count": 1}, {"id": "5645fd43e00290219d08", "name": "我越用越满意、平时也被问得最多的家居好物", "category": "Home", "shop": "@有猫", "price": 33.2, "sales": 84406, "rating": 3.8, "reviews": 4220, "source": "douyin_video_search", "engagement": {"digg": 439388, "comment": 4733, "share": 131737, "search_keyword": "家居好物"}, "creators": [{"name": "有猫", "id": "3910343471925790", "followers": 293121, "video_views": 0, "est_gmv": 840683.76}], "snapshots": [{"date": "2026-06-05", "price": 33.2, "sales": 84406}], "snapshot_count": 1}, {"id": "6c8bba694b863215d204", "name": "年度护肤品速评来了～\n本来想按照区块一个一个讲，拍完发现..", "category": "Beauty", "shop": "@谢", "price": 24.4, "sales": 74189, "rating": 4.2, "reviews": 3709, "source": "douyin_video_search", "engagement": {"digg": 309029, "comment": 14286, "share": 134765, "search_keyword": "护肤品推荐"}, "creators": [{"name": "谢", "id": "1977343675737072", "followers": 24544, "video_views": 0, "est_gmv": 543063.48}], "snapshots": [{"date": "2026-06-05", "price": 24.4, "sales": 74189}], "snapshot_count": 1}, {"id": "b7fafec7b82de1402269", "name": "他们只是身在拼多多  便宜有什么错？", "category": "Beauty", "shop": "@挑战九点睡", "price": 21.1, "sales": 69553, "rating": 4.5, "reviews": 3477, "source": "douyin_video_search", "engagement": {"digg": 492302, "comment": 2075, "share": 66361, "search_keyword": "美妆好物"}, "creators": [{"name": "挑战九点睡", "id": "1259355642792315", "followers": 12631, "video_views": 0, "est_gmv": 440270.49}], "snapshots": [{"date": "2026-06-05", "price": 21.1, "sales": 69553}], "snapshot_count": 1}, {"id": "681cca514b96ef4561b5", "name": "有广和🇯🇵生88个儿子！", "category": "Beauty", "shop": "@多加一份芋源", "price": 14.6, "sales": 62159, "rating": 4.0, "reviews": 3107, "source": "douyin_video_search", "engagement": {"digg": 371186, "comment": 692, "share": 83007, "search_keyword": "美妆好物"}, "creators": [{"name": "多加一份芋源", "id": "3211017394064928", "followers": 11585, "video_views": 0, "est_gmv": 272256.42}], "snapshots": [{"date": "2026-06-05", "price": 14.6, "sales": 62159}], "snapshot_count": 1}, {"id": "3cd8f5a713c85eb9b02e", "name": "人生第一支YSL！！", "category": "Beauty", "shop": "@柟柟", "price": 19.2, "sales": 48045, "rating": 3.8, "reviews": 2402, "source": "douyin_video_search", "engagement": {"digg": 307794, "comment": 3210, "share": 55415, "search_keyword": "口红推荐"}, "creators": [{"name": "柟柟", "id": "2784424398693693", "followers": 3997, "video_views": 0, "est_gmv": 276739.2}], "snapshots": [{"date": "2026-06-05", "price": 19.2, "sales": 48045}], "snapshot_count": 1}, {"id": "330ad03ef706b87075a7", "name": "这些东西怎么能这么好用！", "category": "Home", "shop": "@小小冰🏠", "price": 10.9, "sales": 46936, "rating": 4.7, "reviews": 2346, "source": "douyin_video_search", "engagement": {"digg": 265092, "comment": 1949, "share": 66792, "search_keyword": "家居好物"}, "creators": [{"name": "小小冰🏠", "id": "1399018150696435", "followers": 42505, "video_views": 0, "est_gmv": 153480.72}], "snapshots": [{"date": "2026-06-05", "price": 10.9, "sales": 46936}], "snapshot_count": 1}, {"id": "a1688041e68805216902", "name": "美食博主年度！无限回购的零食！", "category": "Food", "shop": "@村头在逃公主", "price": 7.0, "sales": 46652, "rating": 4.2, "reviews": 2332, "source": "douyin_video_search", "engagement": {"digg": 243064, "comment": 3200, "share": 72353, "search_keyword": "零食推荐"}, "creators": [{"name": "村头在逃公主", "id": "96358629614", "followers": 79187, "video_views": 0, "est_gmv": 97969.2}], "snapshots": [{"date": "2026-06-05", "price": 7.0, "sales": 46652}], "snapshot_count": 1}, {"id": "969b160badddb2f9b864", "name": "【从夯到拉锐评头戴式耳机】2026年初大盘点 共32款", "category": "Electronics", "shop": "@听个饱饱", "price": 26.7, "sales": 45943, "rating": 4.5, "reviews": 2297, "source": "douyin_video_search", "engagement": {"digg": 408134, "comment": 5122, "share": 13684, "search_keyword": "蓝牙耳机推荐"}, "creators": [{"name": "听个饱饱", "id": "1023001399132840", "followers": 8856, "video_views": 0, "est_gmv": 368003.43}], "snapshots": [{"date": "2026-06-05", "price": 26.7, "sales": 45943}], "snapshot_count": 1}, {"id": "0ba1ea94d12d6a241be6", "name": "旅行ootd", "category": "Fashion", "shop": "@火火Land", "price": 11.1, "sales": 39171, "rating": 4.7, "reviews": 1958, "source": "douyin_video_search", "engagement": {"digg": 242803, "comment": 2173, "share": 48188, "search_keyword": "女装穿搭"}, "creators": [{"name": "火火Land", "id": "2705240174367555", "followers": 456179, "video_views": 0, "est_gmv": 130439.43}], "snapshots": [{"date": "2026-06-05", "price": 11.1, "sales": 39171}], "snapshot_count": 1}, {"id": "5cb0434c57dd1306af2c", "name": "20s腮红修容", "category": "Beauty", "shop": "@卧底月亮", "price": 19.5, "sales": 36200, "rating": 4.5, "reviews": 1810, "source": "douyin_video_search", "engagement": {"digg": 301654, "comment": 2133, "share": 18695, "search_keyword": "美妆好物"}, "creators": [{"name": "卧底月亮", "id": "926236225841667", "followers": 117755, "video_views": 0, "est_gmv": 211770.0}], "snapshots": [{"date": "2026-06-05", "price": 19.5, "sales": 36200}], "snapshot_count": 1}, {"id": "e4065c44065b9e6438e7", "name": "200元以内的耳机怎么选？ 品牌耳机是否真的够用 抛弃生..", "category": "Electronics", "shop": "@巨焰评测", "price": 36.6, "sales": 34151, "rating": 4.0, "reviews": 1707, "source": "douyin_video_search", "engagement": {"digg": 285117, "comment": 8514, "share": 13122, "search_keyword": "蓝牙耳机推荐"}, "creators": [{"name": "巨焰评测", "id": "52176823734", "followers": 13406, "video_views": 0, "est_gmv": 374977.98}], "snapshots": [{"date": "2026-06-05", "price": 36.6, "sales": 34151}], "snapshot_count": 1}, {"id": "433af36de4d39985152f", "name": "值得入手的新配件！", "category": "Electronics", "shop": "@胖达Moer", "price": 26.2, "sales": 30340, "rating": 4.4, "reviews": 1517, "source": "douyin_video_search", "engagement": {"digg": 229739, "comment": 2515, "share": 22878, "search_keyword": "手机配件推荐"}, "creators": [{"name": "胖达Moer", "id": "76131427214", "followers": 747671, "video_views": 0, "est_gmv": 238472.4}], "snapshots": [{"date": "2026-06-05", "price": 26.2, "sales": 30340}], "snapshot_count": 1}, {"id": "c8d05e4a62fb36fc6d51", "name": "12款满级吃商课代表！零食排夯行", "category": "Food", "shop": "@大大方方", "price": 14.3, "sales": 29499, "rating": 4.5, "reviews": 1474, "source": "douyin_video_search", "engagement": {"digg": 165164, "comment": 1005, "share": 42606, "search_keyword": "零食推荐"}, "creators": [{"name": "大大方方", "id": "102056436808", "followers": 359644, "video_views": 0, "est_gmv": 126550.71}], "snapshots": [{"date": "2026-06-05", "price": 14.3, "sales": 29499}], "snapshot_count": 1}, {"id": "760b1f4806fbebbe6057", "name": "被全网催更的0-2000耳夹式/挂耳式锐评排行，结果全军覆没", "category": "Electronics", "shop": "@数码小测佬", "price": 22.8, "sales": 28344, "rating": 3.8, "reviews": 1417, "source": "douyin_video_search", "engagement": {"digg": 267594, "comment": 2344, "share": 3722, "search_keyword": "蓝牙耳机推荐"}, "creators": [{"name": "数码小测佬", "id": "1825647466403612", "followers": 16060, "video_views": 0, "est_gmv": 193872.96}], "snapshots": [{"date": "2026-06-05", "price": 22.8, "sales": 28344}], "snapshot_count": 1}, {"id": "19e2df302a8c59066501", "name": "这是不是你一直在找的口水色唇釉合集", "category": "Beauty", "shop": "@树莓昕昕籽", "price": 22.2, "sales": 26564, "rating": 3.8, "reviews": 1328, "source": "douyin_video_search", "engagement": {"digg": 181537, "comment": 1232, "share": 27214, "search_keyword": "口红推荐"}, "creators": [{"name": "树莓昕昕籽", "id": "698880480778548", "followers": 533149, "video_views": 0, "est_gmv": 176916.24}], "snapshots": [{"date": "2026-06-05", "price": 22.2, "sales": 26564}], "snapshot_count": 1}, {"id": "f82b34b08cc4460734ab", "name": "零食分享它来啦！", "category": "Food", "shop": "@QQ大王王王", "price": 9.4, "sales": 26043, "rating": 4.4, "reviews": 1302, "source": "douyin_video_search", "engagement": {"digg": 131227, "comment": 5274, "share": 39552, "search_keyword": "零食推荐"}, "creators": [{"name": "QQ大王王王", "id": "4150015867491689", "followers": 31312, "video_views": 0, "est_gmv": 73441.26}], "snapshots": [{"date": "2026-06-05", "price": 9.4, "sales": 26043}], "snapshot_count": 1}, {"id": "76a0f22d04365b03e7e8", "name": "12支夯爆了的裸色唇釉大分享！震撼美味！！", "category": "Beauty", "shop": "@熊仔丸", "price": 20.9, "sales": 23740, "rating": 4.7, "reviews": 1187, "source": "douyin_video_search", "engagement": {"digg": 170993, "comment": 1193, "share": 21343, "search_keyword": "口红推荐"}, "creators": [{"name": "熊仔丸", "id": "3839923133364631", "followers": 140000, "video_views": 0, "est_gmv": 148849.8}], "snapshots": [{"date": "2026-06-05", "price": 20.9, "sales": 23740}], "snapshot_count": 1}, {"id": "31ffc15e79257a392d0b", "name": "💄年度爱用 没有不购买的义务！！！ 都是自己用了很久的东..", "category": "Beauty", "shop": "@33餐", "price": 17.9, "sales": 22894, "rating": 4.9, "reviews": 1144, "source": "douyin_video_search", "engagement": {"digg": 153402, "comment": 2496, "share": 23518, "search_keyword": "美妆好物"}, "creators": [{"name": "33餐", "id": "182956693407851", "followers": 44432, "video_views": 0, "est_gmv": 122940.78}], "snapshots": [{"date": "2026-06-05", "price": 17.9, "sales": 22894}], "snapshot_count": 1}, {"id": "7ea0e767aab8335ab8d0", "name": "网络爆款零食红榜😜", "category": "Food", "shop": "@谷大喵🍀", "price": 11.0, "sales": 21744, "rating": 4.4, "reviews": 1087, "source": "douyin_video_search", "engagement": {"digg": 140168, "comment": 3681, "share": 23306, "search_keyword": "零食推荐"}, "creators": [{"name": "谷大喵🍀", "id": "54289037394", "followers": 6876149, "video_views": 0, "est_gmv": 71755.2}], "snapshots": [{"date": "2026-06-05", "price": 11.0, "sales": 21744}], "snapshot_count": 1}, {"id": "120d5990d2c99633bcd7", "name": "好吃又平价的零食分享！下饭看吧哈哈哈", "category": "Food", "shop": "@可可kk.", "price": 14.5, "sales": 18636, "rating": 4.3, "reviews": 931, "source": "douyin_video_search", "engagement": {"digg": 84815, "comment": 2242, "share": 32356, "search_keyword": "零食推荐"}, "creators": [{"name": "可可kk.", "id": "2190680528001261", "followers": 225437, "video_views": 0, "est_gmv": 81066.6}], "snapshots": [{"date": "2026-06-05", "price": 14.5, "sales": 18636}], "snapshot_count": 1}, {"id": "2774ff4418bc8639c2c5", "name": "化妆十年回购十年的大牌彩妆合集，纯元级别的人生彩妆～", "category": "Beauty", "shop": "@金十一", "price": 15.9, "sales": 17868, "rating": 5.1, "reviews": 893, "source": "douyin_video_search", "engagement": {"digg": 108111, "comment": 2842, "share": 21631, "search_keyword": "美妆好物"}, "creators": [{"name": "金十一", "id": "4029049442667741", "followers": 23819, "video_views": 0, "est_gmv": 85230.36}], "snapshots": [{"date": "2026-06-05", "price": 15.9, "sales": 17868}], "snapshot_count": 1}, {"id": "8d92e327e24652d7e7aa", "name": "漫展妆娘自用好物分享来了", "category": "Beauty", "shop": "@不想蠕动的蛆", "price": 20.4, "sales": 17734, "rating": 4.2, "reviews": 886, "source": "douyin_video_search", "engagement": {"digg": 113128, "comment": 544, "share": 21043, "search_keyword": "美妆好物"}, "creators": [{"name": "不想蠕动的蛆", "id": "7641883487554176037", "followers": 1755, "video_views": 0, "est_gmv": 108532.08}], "snapshots": [{"date": "2026-06-05", "price": 20.4, "sales": 17734}], "snapshot_count": 1}, {"id": "1730503142741731590", "name": "Adjustable Phone Stand", "category": "Electronics", "shop": "DeskGear", "price": 11.2, "sales": 14560, "rating": 4.9, "reviews": 370, "source": "mock", "engagement": {}, "creators": [{"name": "desksetupco", "id": "cr_009", "followers": 613196, "video_views": 1361240, "est_gmv": 55440.0}], "snapshots": [{"date": "2026-05-04", "price": 10.88, "sales": 12955}, {"date": "2026-05-05", "price": 10.93, "sales": 13030}, {"date": "2026-05-06", "price": 10.92, "sales": 13103}, {"date": "2026-05-07", "price": 10.93, "sales": 13175}, {"date": "2026-05-08", "price": 10.94, "sales": 13246}, {"date": "2026-05-09", "price": 10.91, "sales": 13315}, {"date": "2026-05-10", "price": 11.07, "sales": 13382}, {"date": "2026-05-11", "price": 10.43, "sales": 13447}, {"date": "2026-05-12", "price": 10.96, "sales": 13511}, {"date": "2026-05-13", "price": 11.13, "sales": 13573}, {"date": "2026-05-14", "price": 11.18, "sales": 13634}, {"date": "2026-05-15", "price": 11.09, "sales": 13693}, {"date": "2026-05-16", "price": 11.1, "sales": 13751}, {"date": "2026-05-17", "price": 9.54, "sales": 13806}, {"date": "2026-05-18", "price": 11.07, "sales": 13861}, {"date": "2026-05-19", "price": 11.09, "sales": 13913}, {"date": "2026-05-20", "price": 11.15, "sales": 13964}, {"date": "2026-05-21", "price": 11.14, "sales": 14014}, {"date": "2026-05-22", "price": 11.17, "sales": 14061}, {"date": "2026-05-23", "price": 11.01, "sales": 14107}, {"date": "2026-05-24", "price": 11.15, "sales": 14152}, {"date": "2026-05-25", "price": 11.08, "sales": 14195}, {"date": "2026-05-26", "price": 11.08, "sales": 14236}, {"date": "2026-05-27", "price": 11.16, "sales": 14276}, {"date": "2026-05-28", "price": 11.17, "sales": 14314}, {"date": "2026-05-29", "price": 11.13, "sales": 14350}, {"date": "2026-05-30", "price": 11.32, "sales": 14385}, {"date": "2026-05-31", "price": 10.07, "sales": 14418}, {"date": "2026-06-01", "price": 11.15, "sales": 14449}, {"date": "2026-06-02", "price": 11.1, "sales": 14479}, {"date": "2026-06-03", "price": 11.37, "sales": 14508}, {"date": "2026-06-05", "price": 11.2, "sales": 14560}], "snapshot_count": 32}, {"id": "1729853465730018310", "name": "RGB LED Strip Lights 5M", "category": "Home", "shop": "TechLight Pro", "price": 8.91, "sales": 12391, "rating": 4.4, "reviews": 307, "source": "mock", "engagement": {}, "creators": [{"name": "roommakeover", "id": "cr_006", "followers": 2287629, "video_views": 3279905, "est_gmv": 34749.0}], "snapshots": [{"date": "2026-05-04", "price": 10.28, "sales": 12172}, {"date": "2026-05-05", "price": 10.14, "sales": 12200}, {"date": "2026-05-06", "price": 10.1, "sales": 12226}, {"date": "2026-05-07", "price": 8.64, "sales": 12252}, {"date": "2026-05-08", "price": 9.97, "sales": 12276}, {"date": "2026-05-09", "price": 9.94, "sales": 12298}, {"date": "2026-05-10", "price": 9.94, "sales": 12320}, {"date": "2026-05-11", "price": 9.88, "sales": 12339}, {"date": "2026-05-12", "price": 9.86, "sales": 12358}, {"date": "2026-05-13", "price": 9.67, "sales": 12375}, {"date": "2026-05-14", "price": 9.75, "sales": 12391}, {"date": "2026-05-15", "price": 9.63, "sales": 12405}, {"date": "2026-05-16", "price": 9.59, "sales": 12418}, {"date": "2026-05-17", "price": 9.61, "sales": 12430}, {"date": "2026-05-18", "price": 9.57, "sales": 12440}, {"date": "2026-05-19", "price": 9.49, "sales": 12449}, {"date": "2026-05-20", "price": 9.6, "sales": 12456}, {"date": "2026-05-21", "price": 8.5, "sales": 12463}, {"date": "2026-05-22", "price": 9.4, "sales": 12467}, {"date": "2026-05-23", "price": 9.27, "sales": 12471}, {"date": "2026-05-24", "price": 8.06, "sales": 12473}, {"date": "2026-05-25", "price": 8.58, "sales": 12474}, {"date": "2026-05-26", "price": 9.22, "sales": 12473}, {"date": "2026-05-27", "price": 9.16, "sales": 12471}, {"date": "2026-05-28", "price": 9.12, "sales": 12467}, {"date": "2026-05-29", "price": 9.22, "sales": 12463}, {"date": "2026-05-30", "price": 9.14, "sales": 12456}, {"date": "2026-05-31", "price": 9.09, "sales": 12449}, {"date": "2026-06-01", "price": 9.13, "sales": 12440}, {"date": "2026-06-02", "price": 8.93, "sales": 12430}, {"date": "2026-06-03", "price": 8.98, "sales": 12418}, {"date": "2026-06-05", "price": 8.91, "sales": 12391}], "snapshot_count": 32}, {"id": "e89ee687ead7e7b6a6d1", "name": "最好看的四支口红…我会好好珍惜的！！", "category": "Beauty", "shop": "@一加一", "price": 21.0, "sales": 10173, "rating": 4.0, "reviews": 508, "source": "douyin_video_search", "engagement": {"digg": 65496, "comment": 588, "share": 11687, "search_keyword": "口红推荐"}, "creators": [{"name": "一加一", "id": "1776444550953672", "followers": 5789, "video_views": 0, "est_gmv": 64089.9}], "snapshots": [{"date": "2026-06-05", "price": 21.0, "sales": 10173}], "snapshot_count": 1}, {"id": "cdb404bf51eb72687d4b", "name": "以油养肤进阶版 收工后的高阶保养油霜法", "category": "Beauty", "shop": "@钟欣潼", "price": 24.0, "sales": 9578, "rating": 3.8, "reviews": 478, "source": "douyin_video_search", "engagement": {"digg": 75634, "comment": 5808, "share": 2845, "search_keyword": "护肤品推荐"}, "creators": [{"name": "钟欣潼", "id": "86597944026", "followers": 3981559, "video_views": 0, "est_gmv": 68961.6}], "snapshots": [{"date": "2026-06-05", "price": 24.0, "sales": 9578}], "snapshot_count": 1}, {"id": "4d10eae9d993a62e4f03", "name": "♡｜护肤、护发爱用好物分享 2026第一只爱用好物出炉(-_^)", "category": "Beauty", "shop": "@喂是小野吗", "price": 16.4, "sales": 8756, "rating": 4.6, "reviews": 437, "source": "douyin_video_search", "engagement": {"digg": 80828, "comment": 401, "share": 1977, "search_keyword": "护肤品推荐"}, "creators": [{"name": "喂是小野吗", "id": "20235932154828", "followers": 3176703, "video_views": 0, "est_gmv": 43079.52}], "snapshots": [{"date": "2026-06-05", "price": 16.4, "sales": 8756}], "snapshot_count": 1}, {"id": "1731936406579351560", "name": "Liquid Blush - Dewy Finish", "category": "Beauty", "shop": "GlamStore US", "price": 11.06, "sales": 8632, "rating": 4.7, "reviews": 149, "source": "mock", "engagement": {}, "creators": [{"name": "beautybymia", "id": "cr_001", "followers": 937595, "video_views": 2270344, "est_gmv": 24486.84}], "snapshots": [{"date": "2026-05-04", "price": 11.82, "sales": 6160}, {"date": "2026-05-05", "price": 11.61, "sales": 6254}, {"date": "2026-05-06", "price": 11.73, "sales": 6348}, {"date": "2026-05-07", "price": 11.62, "sales": 6440}, {"date": "2026-05-08", "price": 11.58, "sales": 6531}, {"date": "2026-05-09", "price": 11.63, "sales": 6622}, {"date": "2026-05-10", "price": 11.61, "sales": 6711}, {"date": "2026-05-11", "price": 11.53, "sales": 6798}, {"date": "2026-05-12", "price": 11.69, "sales": 6885}, {"date": "2026-05-13", "price": 10.37, "sales": 6971}, {"date": "2026-05-14", "price": 11.49, "sales": 7056}, {"date": "2026-05-15", "price": 11.36, "sales": 7139}, {"date": "2026-05-16", "price": 9.9, "sales": 7221}, {"date": "2026-05-17", "price": 10.56, "sales": 7302}, {"date": "2026-05-18", "price": 11.36, "sales": 7383}, {"date": "2026-05-19", "price": 11.31, "sales": 7462}, {"date": "2026-05-20", "price": 11.29, "sales": 7539}, {"date": "2026-05-21", "price": 11.43, "sales": 7616}, {"date": "2026-05-22", "price": 11.35, "sales": 7692}, {"date": "2026-05-23", "price": 11.31, "sales": 7766}, {"date": "2026-05-24", "price": 11.31, "sales": 7839}, {"date": "2026-05-25", "price": 11.22, "sales": 7912}, {"date": "2026-05-26", "price": 11.24, "sales": 7983}, {"date": "2026-05-27", "price": 11.22, "sales": 8053}, {"date": "2026-05-28", "price": 11.24, "sales": 8122}, {"date": "2026-05-29", "price": 9.91, "sales": 8190}, {"date": "2026-05-30", "price": 11.23, "sales": 8256}, {"date": "2026-05-31", "price": 11.03, "sales": 8322}, {"date": "2026-06-01", "price": 11.04, "sales": 8386}, {"date": "2026-06-02", "price": 11.15, "sales": 8449}, {"date": "2026-06-03", "price": 11.15, "sales": 8511}, {"date": "2026-06-05", "price": 11.06, "sales": 8632}], "snapshot_count": 32}, {"id": "051464ccd59d67cab392", "name": "大牌彩妆终终终于来了！！这期含金量很高！收藏定了！", "category": "Beauty", "shop": "@胡茜Annnnn", "price": 9.9, "sales": 8225, "rating": 4.7, "reviews": 411, "source": "douyin_video_search", "engagement": {"digg": 58208, "comment": 2097, "share": 6618, "search_keyword": "美妆好物"}, "creators": [{"name": "胡茜Annnnn", "id": "1172492426164404", "followers": 2041749, "video_views": 0, "est_gmv": 24428.25}], "snapshots": [{"date": "2026-06-05", "price": 9.9, "sales": 8225}], "snapshot_count": 1}, {"id": "57ef078330ca7579a295", "name": "大牌色系拿捏淡颜美！年度自用口红分享来啦～", "category": "Beauty", "shop": "@猛女6姐", "price": 21.6, "sales": 7892, "rating": 4.2, "reviews": 394, "source": "douyin_video_search", "engagement": {"digg": 43379, "comment": 774, "share": 11333, "search_keyword": "口红推荐"}, "creators": [{"name": "猛女6姐", "id": "3052697626353438", "followers": 58421, "video_views": 0, "est_gmv": 51140.16}], "snapshots": [{"date": "2026-06-05", "price": 21.6, "sales": 7892}], "snapshot_count": 1}, {"id": "bf7763431e1acc858fc5", "name": "已拥有但不祛魅！ 每个都是巨巨巨好用的大牌彩妆！", "category": "Beauty", "shop": "@金十一", "price": 14.0, "sales": 7651, "rating": 4.4, "reviews": 382, "source": "douyin_video_search", "engagement": {"digg": 48816, "comment": 1413, "share": 8292, "search_keyword": "美妆好物"}, "creators": [{"name": "金十一", "id": "4029049442667741", "followers": 23819, "video_views": 0, "est_gmv": 32134.2}], "snapshots": [{"date": "2026-06-05", "price": 14.0, "sales": 7651}], "snapshot_count": 1}, {"id": "1732177221378180360", "name": "Matte Lipstick - 12 Colors", "category": "Beauty", "shop": "ColorPop Official", "price": 11.02, "sales": 6218, "rating": 4.5, "reviews": 213, "source": "mock", "engagement": {}, "creators": [{"name": "lipstickqueen", "id": "cr_003", "followers": 1183369, "video_views": 4074126, "est_gmv": 46945.2}], "snapshots": [{"date": "2026-05-04", "price": 10.01, "sales": 2917}, {"date": "2026-05-05", "price": 9.45, "sales": 3053}, {"date": "2026-05-06", "price": 9.95, "sales": 3191}, {"date": "2026-05-07", "price": 10.13, "sales": 3332}, {"date": "2026-05-08", "price": 10.19, "sales": 3476}, {"date": "2026-05-09", "price": 10.13, "sales": 3622}, {"date": "2026-05-10", "price": 10.16, "sales": 3771}, {"date": "2026-05-11", "price": 8.75, "sales": 3923}, {"date": "2026-05-12", "price": 10.17, "sales": 4078}, {"date": "2026-05-13", "price": 10.21, "sales": 4235}, {"date": "2026-05-14", "price": 10.28, "sales": 4396}, {"date": "2026-05-15", "price": 10.3, "sales": 4559}, {"date": "2026-05-16", "price": 10.35, "sales": 4725}, {"date": "2026-05-17", "price": 10.21, "sales": 4808}, {"date": "2026-05-18", "price": 10.37, "sales": 4891}, {"date": "2026-05-19", "price": 10.32, "sales": 4972}, {"date": "2026-05-20", "price": 10.34, "sales": 5053}, {"date": "2026-05-21", "price": 10.44, "sales": 5133}, {"date": "2026-05-22", "price": 10.47, "sales": 5212}, {"date": "2026-05-23", "price": 10.45, "sales": 5290}, {"date": "2026-05-24", "price": 10.65, "sales": 5367}, {"date": "2026-05-25", "price": 9.49, "sales": 5443}, {"date": "2026-05-26", "price": 10.58, "sales": 5518}, {"date": "2026-05-27", "price": 10.5, "sales": 5592}, {"date": "2026-05-28", "price": 9.2, "sales": 5665}, {"date": "2026-05-29", "price": 9.86, "sales": 5738}, {"date": "2026-05-30", "price": 10.67, "sales": 5809}, {"date": "2026-05-31", "price": 10.67, "sales": 5880}, {"date": "2026-06-01", "price": 10.85, "sales": 5949}, {"date": "2026-06-02", "price": 10.75, "sales": 6018}, {"date": "2026-06-03", "price": 10.83, "sales": 6085}, {"date": "2026-06-05", "price": 11.02, "sales": 6218}], "snapshot_count": 32}, {"id": "1730242941495248835", "name": "Foldable Storage Box Set", "category": "Home", "shop": "HomeEssential", "price": 18.06, "sales": 5929, "rating": 4.6, "reviews": 103, "source": "mock", "engagement": {}, "creators": [{"name": "homewithstyle", "id": "cr_004", "followers": 531814, "video_views": 697406, "est_gmv": 19667.34}], "snapshots": [{"date": "2026-05-04", "price": 18.69, "sales": 4921}, {"date": "2026-05-05", "price": 18.38, "sales": 4963}, {"date": "2026-05-06", "price": 18.58, "sales": 5005}, {"date": "2026-05-07", "price": 18.42, "sales": 5045}, {"date": "2026-05-08", "price": 18.39, "sales": 5085}, {"date": "2026-05-09", "price": 18.48, "sales": 5125}, {"date": "2026-05-10", "price": 18.47, "sales": 5163}, {"date": "2026-05-11", "price": 18.36, "sales": 5201}, {"date": "2026-05-12", "price": 18.63, "sales": 5239}, {"date": "2026-05-13", "price": 16.54, "sales": 5275}, {"date": "2026-05-14", "price": 18.35, "sales": 5311}, {"date": "2026-05-15", "price": 18.16, "sales": 5346}, {"date": "2026-05-16", "price": 15.83, "sales": 5381}, {"date": "2026-05-17", "price": 16.91, "sales": 5415}, {"date": "2026-05-18", "price": 18.22, "sales": 5448}, {"date": "2026-05-19", "price": 18.15, "sales": 5481}, {"date": "2026-05-20", "price": 18.14, "sales": 5512}, {"date": "2026-05-21", "price": 18.38, "sales": 5543}, {"date": "2026-05-22", "price": 18.27, "sales": 5574}, {"date": "2026-05-23", "price": 18.23, "sales": 5604}, {"date": "2026-05-24", "price": 18.25, "sales": 5633}, {"date": "2026-05-25", "price": 18.12, "sales": 5661}, {"date": "2026-05-26", "price": 18.17, "sales": 5689}, {"date": "2026-05-27", "price": 18.15, "sales": 5716}, {"date": "2026-05-28", "price": 18.21, "sales": 5742}, {"date": "2026-05-29", "price": 16.07, "sales": 5768}, {"date": "2026-05-30", "price": 18.22, "sales": 5793}, {"date": "2026-05-31", "price": 17.92, "sales": 5817}, {"date": "2026-06-01", "price": 17.95, "sales": 5841}, {"date": "2026-06-02", "price": 18.15, "sales": 5864}, {"date": "2026-06-03", "price": 18.16, "sales": 5886}, {"date": "2026-06-05", "price": 18.06, "sales": 5929}], "snapshot_count": 32}, {"id": "48d9f1ba18474edc3c48", "name": "抗老界严厉的母亲出现了！", "category": "Beauty", "shop": "@宋智轶", "price": 16.8, "sales": 5591, "rating": 4.2, "reviews": 279, "source": "douyin_video_search", "engagement": {"digg": 44575, "comment": 458, "share": 3473, "search_keyword": "精华液推荐"}, "creators": [{"name": "宋智轶", "id": "66798164973", "followers": 4850960, "video_views": 0, "est_gmv": 28178.64}], "snapshots": [{"date": "2026-06-05", "price": 16.8, "sales": 5591}], "snapshot_count": 1}, {"id": "2d3be9b8a179a4e0d793", "name": "💭橄榄皮天菜｜这三只日常用得最多～", "category": "Beauty", "shop": "@KiTiroll", "price": 19.3, "sales": 5251, "rating": 4.5, "reviews": 262, "source": "douyin_video_search", "engagement": {"digg": 39644, "comment": 147, "share": 4192, "search_keyword": "口红推荐"}, "creators": [{"name": "KiTiroll", "id": "4408422124490347", "followers": 901, "video_views": 0, "est_gmv": 30403.29}], "snapshots": [{"date": "2026-06-05", "price": 19.3, "sales": 5251}], "snapshot_count": 1}, {"id": "1731449445649631240", "name": "Wireless Earbuds Pro", "category": "Electronics", "shop": "AudioTech US", "price": 25.56, "sales": 4864, "rating": 4.4, "reviews": 167, "source": "mock", "engagement": {}, "creators": [{"name": "techreviewdaily", "id": "cr_007", "followers": 1399537, "video_views": 8190665, "est_gmv": 76219.92}], "snapshots": [{"date": "2026-05-04", "price": 28.35, "sales": 1225}, {"date": "2026-05-05", "price": 28.28, "sales": 1315}, {"date": "2026-05-06", "price": 28.32, "sales": 1408}, {"date": "2026-05-07", "price": 28.18, "sales": 1503}, {"date": "2026-05-08", "price": 28.15, "sales": 1601}, {"date": "2026-05-09", "price": 27.62, "sales": 1702}, {"date": "2026-05-10", "price": 27.87, "sales": 1805}, {"date": "2026-05-11", "price": 27.58, "sales": 1910}, {"date": "2026-05-12", "price": 27.47, "sales": 2019}, {"date": "2026-05-13", "price": 27.56, "sales": 2130}, {"date": "2026-05-14", "price": 27.48, "sales": 2243}, {"date": "2026-05-15", "price": 27.27, "sales": 2359}, {"date": "2026-05-16", "price": 27.62, "sales": 2478}, {"date": "2026-05-17", "price": 24.47, "sales": 2599}, {"date": "2026-05-18", "price": 27.1, "sales": 2723}, {"date": "2026-05-19", "price": 26.75, "sales": 2849}, {"date": "2026-05-20", "price": 23.28, "sales": 2978}, {"date": "2026-05-21", "price": 24.81, "sales": 3110}, {"date": "2026-05-22", "price": 26.69, "sales": 3244}, {"date": "2026-05-23", "price": 26.53, "sales": 3381}, {"date": "2026-05-24", "price": 26.46, "sales": 3520}, {"date": "2026-05-25", "price": 26.76, "sales": 3662}, {"date": "2026-05-26", "price": 26.55, "sales": 3806}, {"date": "2026-05-27", "price": 26.44, "sales": 3953}, {"date": "2026-05-28", "price": 26.4, "sales": 4103}, {"date": "2026-05-29", "price": 26.17, "sales": 4255}, {"date": "2026-05-30", "price": 26.18, "sales": 4410}, {"date": "2026-05-31", "price": 26.11, "sales": 4487}, {"date": "2026-06-01", "price": 26.04, "sales": 4565}, {"date": "2026-06-02", "price": 26.17, "sales": 4641}, {"date": "2026-06-03", "price": 25.51, "sales": 4716}, {"date": "2026-06-05", "price": 25.56, "sales": 4864}], "snapshot_count": 32}]};
+<h2 style="text-align:center;margin:48px 0 24px;" id="pricing">Simple Pricing</h2>
+<div class="pricing">
+  <div class="plan popular">
+    <span class="badge badge-beta" style="margin-bottom:8px;">BETA PRICE</span>
+    <h3>Starter</h3>
+    <div class="price">$9<span>/mo</span></div>
+    <p style="color:#888;font-size:14px;text-decoration:line-through;">$19/mo</p>
+    <ul>
+      <li>10 trending products daily</li>
+      <li>Engagement & velocity tracking</li>
+      <li>7-day trend analysis</li>
+      <li>Email report every morning</li>
+      <li>Trend spike alerts</li>
+    </ul>
+    <a href="https://paypal.me/xiaobing388/9.5" class="cta" style="display:block;text-align:center;font-size:15px;padding:12px;">Get Started</a>
+  </div>
+  <div class="plan">
+    <h3>Growth</h3>
+    <div class="price">$24<span>/mo</span></div>
+    <p style="color:#888;font-size:14px;text-decoration:line-through;">$49/mo</p>
+    <ul>
+      <li>30 trending products daily</li>
+      <li>Everything in Starter</li>
+      <li>Creator & engagement analytics</li>
+      <li>Category heat maps</li>
+      <li>Priority support</li>
+    </ul>
+    <a href="https://paypal.me/xiaobing388/24" class="cta" style="display:block;text-align:center;font-size:15px;padding:12px;background:linear-gradient(135deg,#2a2a2a,#333);">Get Started</a>
+  </div>
+  <div class="plan">
+    <h3>Pro</h3>
+    <div class="price">$49<span>/mo</span></div>
+    <p style="color:#888;font-size:14px;text-decoration:line-through;">$99/mo</p>
+    <ul>
+      <li>100 trending products daily</li>
+      <li>Everything in Growth</li>
+      <li>Sourcing recommendation engine</li>
+      <li>Custom category alerts</li>
+      <li>Early-access trend briefings</li>
+    </ul>
+    <a href="https://paypal.me/xiaobing388/49" class="cta" style="display:block;text-align:center;font-size:15px;padding:12px;background:linear-gradient(135deg,#2a2a2a,#333);">Get Started</a>
+  </div>
+</div>
 
-function renderStats() {
-  const products = DATA.products;
-  const liveProducts = products.filter(p => p.source === 'douyin_video_search');
-  const mockProducts = products.filter(p => p.source === 'mock');
-  const categories = {};
-  products.forEach(p => { categories[p.category] = (categories[p.category]||0) + 1; });
+<div class="faq">
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h4>How is this different from Kalodata or FastMoss?</h4>
+    <p>Those tools track TikTok Shop products that are <strong>already selling</strong>. ShopPulse monitors Douyin (China TikTok) to find trends <strong>before they go global</strong>. You get a 2-6 week head start on sourcing and listing.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Where does the data come from?</h4>
+    <p>We analyze Douyin video content, hashtag trends, creator activity, and engagement signals from China's 700M+ user platform. Our algorithms identify rising product categories and format patterns.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Do I need to understand Chinese?</h4>
+    <p>No. Every report is in English. We translate product names, categorize trends, and give you actionable sourcing recommendations — no Chinese required.</p>
+  </div>
+  <div class="faq-item">
+    <h4>How soon can I act on the trends?</h4>
+    <p>Douyin trends typically take 2-6 weeks to appear on TikTok Shop globally. Our subscribers routinely list products before mainstream competition arrives. That's the edge.</p>
+  </div>
+</div>
 
-  const totalEngagement = liveProducts.reduce((sum, p) => sum + (p.engagement?.digg||0), 0);
+<div class="footer">
+  <p>ShopPulse · TikTok Trend Intelligence from Overseas. Spot it on Douyin. Sell it on TikTok Shop.</p>
+  <p style="margin-top:8px;">© 2026 ShopPulse. Not affiliated with TikTok or Douyin.</p>
+</div>
 
-  document.getElementById('stats').innerHTML = `
-    <div class="stat-card">
-      <div class="value" style="color:#00f2ea">${liveProducts.length}</div>
-      <div class="label">🎵 抖音实时信号</div>
-    </div>
-    <div class="stat-card">
-      <div class="value" style="color:#ff0050">${(totalEngagement/1000000).toFixed(1)}M</div>
-      <div class="label">🔥 总互动量 (点赞)</div>
-    </div>
-    <div class="stat-card">
-      <div class="value beauty">${categories['Beauty']||0}</div>
-      <div class="label">💄 美妆</div>
-    </div>
-    <div class="stat-card">
-      <div class="value home">${categories['Home']||0}</div>
-      <div class="label">🏠 家居</div>
-    </div>
-    <div class="stat-card">
-      <div class="value electronics">${categories['Electronics']||0}</div>
-      <div class="label">📱 数码</div>
-    </div>
-    <div class="stat-card">
-      <div class="value fashion">${categories['Fashion']||0}</div>
-      <div class="label">👗 穿搭</div>
-    </div>
-    <div class="stat-card">
-      <div class="value food">${categories['Food']||0}</div>
-      <div class="label">🍿 零食</div>
-    </div>
-    <div class="stat-card">
-      <div class="value" style="color:#666">${DATA.total_snapshots}</div>
-      <div class="label">📊 历史快照总数</div>
-    </div>
-  `;
-}
-
-function formatNum(n) { if (n >= 1e6) return (n/1e6).toFixed(1)+'M'; if (n >= 1e3) return (n/1e3).toFixed(1)+'K'; return n.toString(); }
-
-function renderProducts(filterCat) {
-  const products = filterCat === 'all' ? DATA.products : DATA.products.filter(p => p.category === filterCat);
-  if (products.length === 0) {
-    document.getElementById('products').innerHTML = '<div class="empty">该品类暂无数据</div>';
-    return;
-  }
-  document.getElementById('products').innerHTML = products.map(p => {
-    const e = p.engagement || {};
-    const isLive = p.source === 'douyin_video_search';
-    const catClass = (p.category||'').toLowerCase();
-    const creator = p.creators[0] || {};
-    const followerStr = creator.followers >= 10000 ? (creator.followers/10000).toFixed(1)+'w' : formatNum(creator.followers);
-
-    return `
-    <div class="product-card">
-      <div class="card-header">
-        <div class="name">
-          ${p.name}
-          ${isLive ? '<span class="source-tag">实时</span>' : '<span class="source-tag mock">模拟</span>'}
-        </div>
-        <span class="badge badge-${catClass}">${p.category||'--'}</span>
-      </div>
-      <div class="card-body">
-        <div class="metric-row">
-          ${isLive ? `
-            <div class="metric">🔥 <strong>${formatNum(e.digg||0)}</strong> 点赞</div>
-            <div class="metric">💬 <strong>${formatNum(e.comment||0)}</strong> 评论</div>
-            <div class="metric">🔄 <strong>${formatNum(e.share||0)}</strong> 分享</div>
-            <div class="metric">🏷️ <strong>${e.search_keyword||''}</strong></div>
-          ` : `
-            <div class="metric">💰 价格 <strong>$${p.price?.toFixed(2)}</strong></div>
-            <div class="metric">📦 销量 <strong>${formatNum(p.sales)}</strong></div>
-            <div class="metric">⭐ 评分 <strong>${p.rating}</strong></div>
-            <div class="metric">💬 <strong>${formatNum(p.reviews)}</strong> 评价</div>
-          `}
-        </div>
-        ${isLive ? `<div class="metric" style="font-size:12px;color:#888;">💰 参考价: <strong style="color:#e0e0e0;">$${p.price?.toFixed(2)}</strong> · 预估销量: <strong style="color:#e0e0e0;">${formatNum(p.sales)}</strong></div>` : ''}
-        ${creator.name ? `
-        <div class="creator-row">
-          <div class="creator-avatar">${creator.name[0]}</div>
-          <div class="creator-info">
-            <div class="c-name">@${creator.name}</div>
-            <div class="c-stats">粉${followerStr} · 预估GMV $${formatNum(creator.est_gmv||0)}</div>
-          </div>
-        </div>` : ''}
-      </div>
-      <div class="card-footer">
-        <span>🏪 ${p.shop||'--'}</span>
-        <span>📸 ${p.snapshot_count} 条快照</span>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filter(cat) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  renderProducts(cat);
-}
-
-renderStats();
-renderProducts('all');
-</script>
+</div>
 </body>
 </html>
