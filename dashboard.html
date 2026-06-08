@@ -232,10 +232,10 @@ function render() {
 
 function renderCard(p) {
   var wp = p.wholesale_price_rmb ? "¥"+Number(p.wholesale_price_rmb).toFixed(2) : "N/A";
-  var rp = p.retail_price_rmb ? "¥"+Number(p.retail_price_rmb).toFixed(2) : "—";
+  var sourceCost = p.sourcing_cost_usd ? "$"+Number(p.sourcing_cost_usd).toFixed(2) : "";
   var profit = p.profit_per_unit_usd ? "$"+Number(p.profit_per_unit_usd).toFixed(2) : "N/A";
   var margin = p.profit_margin_pct ? Number(p.profit_margin_pct).toFixed(0)+"%" : "";
-  var sell = p.suggested_selling_price_usd ? "Sell at $"+Number(p.suggested_selling_price_usd).toFixed(2) : "";
+  var sell = p.suggested_selling_price_usd ? "Est. TikTok Shop price: $"+Number(p.suggested_selling_price_usd).toFixed(2) : "";
   var cc = getCatColor(p._category);
 
   // Image
@@ -277,10 +277,10 @@ function renderCard(p) {
     (tagsHtml ? '<div class="feature-tags">'+tagsHtml+'</div>' : '')+
     (badgesHtml ? '<div class="badges-row">'+badgesHtml+'</div>' : '')+
     '<div class="price-row">'+
-    '<div class="price-box"><div class="price-label">Wholesale (1688)</div><div class="price-value w">'+wp+'</div></div>'+
-    '<div class="price-box"><div class="price-label">Retail ('+(p.retail_source||"CN")+')</div><div class="price-value r">'+rp+'</div></div>'+
+    '<div class="price-box"><div class="price-label">Sourcing Cost (1688 Wholesale)</div><div class="price-value w">'+wp+' ('+sourceCost+')</div></div>'+
+    '<div class="price-box"><div class="price-label">Est. TikTok Shop Price</div><div class="price-value r">$'+Number(p.suggested_selling_price_usd||0).toFixed(2)+'</div></div>'+
     '</div>'+
-    '<div class="profit-bar"><span class="profit-amt">'+profit+'/unit</span><span class="profit-pct">'+margin+' margin</span><span class="sell-price">'+sell+'</span></div>'+
+    '<div class="profit-bar"><span class="profit-amt">'+profit+' profit/unit</span><span class="profit-pct">'+margin+' margin</span></div>'+
     (p.ideal_for ? '<div class="ideal-for">Ideal for: '+p.ideal_for+'</div>' : '')+
     '</div></div>';
 }
